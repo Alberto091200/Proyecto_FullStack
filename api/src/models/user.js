@@ -7,6 +7,11 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   direccion: { type: String, required: true},
   isAdmin: Boolean,
+  favs: [
+    {
+      productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', default: [] }
+    }
+  ],
 })
 
 const User = mongoose.model("User", userSchema)

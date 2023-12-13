@@ -1,68 +1,78 @@
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
-
 const { Router } = require("express")
 const { body, validationResult } = require("express-validator")
-
 const { User } = require("../models/user")
 
-const router = Router()
+const router = Router();
 
-router.post("/login", async (req, res) => {
-  const { username, password: passwordPlainText } = req.body
+router.post("/login", [
+  body("email").notEmpty(),
+  body("password").notEmpty(),
+], async (req, res) => {
+  const { email, password } = req.body
 
-  const user = await User.findOne({ username })
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() })
+  }
 
-  if (!user)
-    return res.status(400).json({ msg: "Usuario o contraseña incorrecto" })
+  try {
+    const user = await User.findOne({ email });
 
-  const isValidUser = await bcrypt.compare(passwordPlainText, user.password)
+    if (!user || !(await bcrypt.compare(password, user.password))) {
+      return res.status(400).json({ msg: "Usuario o contraseña incorrecto" })
+    }
 
-  if (!isValidUser)
-    return res.status(400).json({ msg: "Usuario o contraseña incorrecto" })
+    const token = jwt.sign(
+      { id: user._id, isAdmin: user.isAdmin },
+      process.env.privateKey
+    )
 
-  const token = jwt.sign(
-    { id: user._id, isAdmin: user.isAdmin },
-    process.env.privateKey
-  )
-
-  res.setHeader("x-auth-token", token)
-  res.json({ msg: "Usuario logueado" })
+    res.setHeader("x-auth-token", token)
+    res.json({ msg: "Usuario logueado" })
+  } catch (error) {
+    console.error('Error al iniciar sesión:', error)
+    res.status(500).json({ msg: 'Error interno del servidor' })
+  }
 })
 
-router.post(
-  "/register",
+router.post("/register", [
   body("email").custom(async (email) => {
     const user = await User.findOne({ email })
 
     if (user) throw new Error("Vuelve a intentarlo más tarde")
   }),
-  async (req, res) => {
-    const { username, password: passwordPlainText, isAdmin, ...rest } = req.body
+  body("nombre").notEmpty(),
+  body("password").notEmpty(),
+  body("email").notEmpty(),
+  body("direccion").notEmpty(),
 
-    const user = await User.findOne({ username })
-    if (user)
-      return res.status(400).json({ msg: "Vuelve a intentarlo más tarde" })
+], async (req, res) => {
+  const { username, password, isAdmin, ...rest } = req.body
 
-    const { errors } = validationResult(req)
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() })
+  }
 
-    if (errors.length)
-      return res.status(400).send({ msg: "Vuelve a intentarlo más tarde" })
-
+  try {
     const salt = await bcrypt.genSalt(10)
-    const password = await bcrypt.hash(passwordPlainText, salt)
+    const hashedPassword = await bcrypt.hash(password, salt);
 
-    const newUser = await User.create({ username, password, email: req.body.email, isAdmin, ...rest })
+    const newUser = await User.create({ username, password: hashedPassword, email: req.body.email, isAdmin, ...rest })
 
     const token = jwt.sign(
       { id: newUser._id, isAdmin: newUser.isAdmin },
       process.env.privateKey
     )
 
-    res.setHeader("x-auth-token", token)
+    res.setHeader("x-auth-token", token);
     res.json({ msg: "Usuario registrado" })
+  } catch (error) {
+    console.error('Error al registrar usuario:', error)
+    res.status(500).json({ msg: 'Error interno del servidor' })
   }
-)
-
+})
 
 module.exports = router

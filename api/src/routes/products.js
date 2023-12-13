@@ -10,26 +10,48 @@ const { Router } = require('express')
 
 const router = Router()
 
-router.get('/product', productController.getAll)
+router.get(
+	'/',
+	productController.getAll
+)
 
-router.post('/product', auth, admin, validate, productValidation, productController.create);
-router.put(
-	'/product/:productId',
+router.get(
+	'/:nombre',
+	productController.getByNombre
+)
+
+
+router.post(
+	'/',
 	auth,
 	admin,
-	mongoIdFromParamValidation('productId'),
+	validate,
 	productValidation,
+	productController.create
+)
+
+router.put(
+	'/:nombre',
+	auth,
+	admin,
 	validate,
 	productController.update
 )
 
 router.delete(
-	'/product/:productId',
+	'/:nombre',
 	auth,
 	admin,
-	mongoIdFromParamValidation('productId'),
 	validate,
 	productController.remove
-) 
+  );
+  
+
+router.post(
+	'/users/:userId/wishlist/:nombre',
+	auth,
+	validate,
+	productController.toggleWishlist
+)
 
 module.exports = router
