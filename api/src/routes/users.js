@@ -30,7 +30,7 @@ router.post("/login", [
     )
 
     res.setHeader("x-auth-token", token)
-    res.json({ msg: "Usuario logueado" })
+    res.json({ msg: "Usuario logueado", user, token })
   } catch (error) {
     console.error('Error al iniciar sesión:', error)
     res.status(500).json({ msg: 'Error interno del servidor' })
@@ -43,7 +43,7 @@ router.post("/register", [
 
     if (user) throw new Error("Vuelve a intentarlo más tarde")
   }),
-  body("nombre").notEmpty(),
+  body("name").notEmpty(),
   body("password").notEmpty(),
   body("email").notEmpty(),
   body("direccion").notEmpty(),

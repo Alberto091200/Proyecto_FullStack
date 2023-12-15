@@ -16,8 +16,8 @@ router.get(
 )
 
 router.get(
-	'/:nombre',
-	productController.getByNombre
+	'/:name',
+	productController.getByname
 )
 
 
@@ -31,7 +31,7 @@ router.post(
 )
 
 router.put(
-	'/:nombre',
+	'/:name',
 	auth,
 	admin,
 	validate,
@@ -39,19 +39,27 @@ router.put(
 )
 
 router.delete(
-	'/:nombre',
+	'/:name',
 	auth,
 	admin,
 	validate,
 	productController.remove
-  );
+  )
   
 
 router.post(
-	'/users/:userId/wishlist/:nombre',
+	'/users/:userId/wishlist/:_id',
 	auth,
 	validate,
-	productController.toggleWishlist
+	productController.addToWishList
 )
+
+router.delete(
+	'/users/:userId/wishlist/:name',
+	auth,
+	validate,
+	productController.removeFromWishList
+)
+
 
 module.exports = router

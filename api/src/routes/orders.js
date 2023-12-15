@@ -1,43 +1,14 @@
-const { ordersValidation } = require('../models/orders')
-const ordersController = require('../controllers/orders')
-const mongoIdFromParamValidation = require('../middlewares/mongoIdFromParam')
+const { Router } = require('express');
+const ordersController = require('../controllers/orders');
+const auth = require('../middlewares/auth');
+const admin = require('../middlewares/admin');
+const validate = require('../middlewares/validate');
 
-const auth = require('../middlewares/auth')
-const admin = require('../middlewares/admin')
+const router = Router();
 
-const validate = require('../middlewares/validate')
+router.get('/', auth, ordersController.getAll);
+router.post('/', auth, validate, ordersController.create);
+router.put('/:orderId', auth, admin, validate, ordersController.update);
+// router.delete('/:orderId', auth, admin, ordersController.remove);
 
-const { Router } = require('express')
-
-const router = Router()
-
-const { query } = require('express-validator')
-
-router.get('/', auth, ordersController.getAll)
-
-router.post(
-	'/',
- 	auth,
-	ordersValidation,
-	validate,
-	ordersController.create
-)
-
-router.put(
-	'/',
-	auth,
-	mongoIdFromParamValidation('orderId'),
-	ordersValidation,
-	validate,
-	ordersController.update
-)
-
-router.delete(
-	'/',
-	auth,
-	admin,
-	mongoIdFromParamValidation('orderId'),
-	ordersController.remove
-)
-
-module.exports = router
+module.exports = router;

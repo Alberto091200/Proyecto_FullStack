@@ -1011,11 +1011,11 @@
       "locked": false,
       "fontSize": 20,
       "fontFamily": 1,
-      "text": "Nombre",
+      "text": "name",
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "REo574ozQSm40nfFOncBR",
-      "originalText": "Nombre",
+      "originalText": "name",
       "lineHeight": 1.25,
       "baseline": 18
     },
