@@ -23,26 +23,21 @@ router.get(
 
 router.post(
 	'/',
-	auth,
-	admin,
-	validate,
-	productValidation,
+	[auth, admin],
+	[productValidation,validate],
 	productController.create
 )
 
 router.put(
 	'/:name',
-	auth,
-	admin,
-	validate,
+	[auth, admin],
+	[productValidation,validate],
 	productController.update
 )
 
 router.delete(
 	'/:name',
-	auth,
-	admin,
-	validate,
+	[auth, admin],
 	productController.remove
   )
   
@@ -50,14 +45,12 @@ router.delete(
 router.post(
 	'/users/:userId/wishlist/:_id',
 	auth,
-	validate,
 	productController.addToWishList
 )
 
 router.delete(
 	'/users/:userId/wishlist/:name',
 	auth,
-	validate,
 	productController.removeFromWishList
 )
 

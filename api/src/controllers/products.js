@@ -16,24 +16,20 @@ const getAll = async (req, res) => {
 const getByname = async (req, res) => {
   const { name } = req.params;
 
-  try {
-    const product = await Products.findOne({ name: name });
+  const product = await Products.findOne({ name: name });
 
-    if (!product) {
+  if (!product) {
       return res.status(404).json({ msg: 'Producto no encontrado' });
-    }
-
-    res.json(product);
-  } catch (error) {
-    console.error('Error al obtener el producto por name:', error);
-    res.status(500).json({ msg: 'Error interno del servidor' });
   }
+
+  res.json(product);
+ 
 }
 
 const update = async (req, res) => {
   const { name } = req.params;
 
-  try {
+
     const product = await Products.findOneAndUpdate(
       { name: name },
       req.body,
@@ -45,16 +41,13 @@ const update = async (req, res) => {
     }
 
     res.json(product)
-  } catch (error) {
-    console.error('Error al actualizar el producto:', error)
-    res.status(500).json({ msg: 'Error interno del servidor' })
-  }
+  
 }
 
 const remove = async (req, res) => {
-  const { name } = req.params;
+  const { name } = req.params
 
-  try {
+
     const product = await Products.findOneAndDelete({ name: name })
 
     if (!product) {
@@ -62,17 +55,14 @@ const remove = async (req, res) => {
     }
 
     res.json(product)
-  } catch (error) {
-    console.error('Error al borrar el producto:', error)
-    res.status(500).json({ msg: 'Error interno del servidor' })
-  }
+
 };
 
 
 const addToWishList = async (req, res) => {
   // const userId = req.params.userId;
   // const productId = req.params.productId;
-  try {
+
     const user = await User.findById(req.params.userId);
     if (!user) {
       return res.status(404).json({ msg: 'Usuario no encontrado' });
@@ -89,10 +79,7 @@ const addToWishList = async (req, res) => {
     res.json({ msg: 'Producto añadido a la wishlist', user });
    }
     
-  } catch (error) {
-    console.error('Error al agregar a la wishlist:', error);
-    res.status(500).json({ msg: 'Error interno del servidor' });
-  }
+ 
 };
 
 
@@ -100,7 +87,7 @@ const removeFromWishList = async (req, res) => {
   const userId = req.params.userId;
   const productId = req.params.productId;
 
-  try {
+
     
     const user = await User.findById(userId);
 
@@ -124,10 +111,7 @@ const removeFromWishList = async (req, res) => {
     // Eliminar el producto de la wishlist del usuario
     const updatedUser = await User.findByIdAndUpdate(userId, { $pull: { favs: { productId } } }, { new: true });
     res.json({ msg: 'Producto eliminado de la wishlist', user: updatedUser });
-  } catch (error) {
-    console.error('Error al eliminar de la wishlist:', error);
-    res.status(500).json({ msg: 'Error interno del servidor' });
-  }
+ 
 };
 
 
