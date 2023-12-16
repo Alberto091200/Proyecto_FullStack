@@ -60,62 +60,41 @@ const remove = async (req, res) => {
 
 
 const addToWishList = async (req, res) => {
-  // const userId = req.params.userId;
-  // const productId = req.params.productId;
-
-    const user = await User.findById(req.params.userId);
+    const user = await User.findById(req.params.userId)
     if (!user) {
-      return res.status(404).json({ msg: 'Usuario no encontrado' });
+      return res.status(404).json({ msg: 'Usuario no encontrado' })
     }
-    let productToWishlist = await Products.findById(req.params._id);
+    let productToWishlist = await Products.findById(req.params._id)
 
     if (!productToWishlist) {
-      return res.status(404).json({ msg: 'Producto no encontrado' });
+      return res.status(404).json({ msg: 'Producto no encontrado' })
     }
-  //  if (productToWishlist.favs.includes(req.user._id)) {
-  //   return res.status(400).send({msg: "Producto ya en wishlist"})
+
     else {
     const updatedUser = await User.findByIdAndUpdate(req.params._id, { $push: { favs:  req.user._id, } }, { new: true });
-    res.json({ msg: 'Producto añadido a la wishlist', user });
+    res.json({ msg: 'Producto añadido a la wishlist', user })
    }
-    
- 
-};
-
+}
 
 const removeFromWishList = async (req, res) => {
-  const userId = req.params.userId;
-  const productId = req.params.productId;
+  const user = await User.findById(req.params.userId);
+  if (!user) {
+    return res.status(404).json({ msg: 'Usuario no encontrado' })
+  }
+  let productToWishlist = await Products.findById(req.params._id)
 
+  if (!productToWishlist) {
+    return res.status(404).json({ msg: 'Producto no encontrado' })
+  }
 
-    
-    const user = await User.findById(userId);
+  const updatedUser = await User.findByIdAndUpdate(
+    req.params.userId,
+    { $pull: { favs: req.params._id } },
+    { new: true }
+  );
 
-    if (!user) {
-      return res.status(404).json({ msg: 'Usuario no encontrado' });
-    }
-
-    const product = await Products.find({productId});
-
-    if (!product) {
-      return res.status(404).json({ msg: 'Producto no encontrado' });
-    }
-
-    // Verificar si el producto está en la wishlist del usuario
-    const isProductInWishlist = user.favs.some(fav => fav.productId.equals(productId));
-
-    if (!isProductInWishlist) {
-      return res.json({ msg: 'El producto no está en la wishlist' });
-    }
-
-    // Eliminar el producto de la wishlist del usuario
-    const updatedUser = await User.findByIdAndUpdate(userId, { $pull: { favs: { productId } } }, { new: true });
-    res.json({ msg: 'Producto eliminado de la wishlist', user: updatedUser });
- 
-};
-
-
-
+  res.json({ msg: 'Producto eliminado de la wishlist', user: updatedUser })
+}
 
 module.exports = {
   create,

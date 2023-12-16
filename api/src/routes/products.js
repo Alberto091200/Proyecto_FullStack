@@ -49,7 +49,7 @@ router.post(
 )
 
 router.delete(
-	'/users/:userId/wishlist/:name',
+	'/users/:userId/wishlist/:_id',
 	auth,
 	productController.removeFromWishList
 )
