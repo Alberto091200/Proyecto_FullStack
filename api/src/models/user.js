@@ -10,9 +10,9 @@ const userSchema = new mongoose.Schema({
   direccion: { type: String, required: true},
   isAdmin: Boolean,
   favs: [
-    {
-      productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', default: [] }
-    }
+    
+      { type: mongoose.Schema.Types.ObjectId, ref: 'Products', default: [] }
+    
   ], 
 })
 

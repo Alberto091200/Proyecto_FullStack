@@ -1,9 +1,15 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
+
+import './bootstrap.js'
+
+import RouterProvider from './router'
+import { AuthProvider } from 'hooks'
+import ThemeProvider from './theme'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <ThemeProvider>
+    <AuthProvider>
+      <RouterProvider />
+    </AuthProvider>
+  </ThemeProvider>
 )

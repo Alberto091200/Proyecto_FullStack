@@ -56,24 +56,27 @@ const remove = async (req, res) => {
 
     res.json(product)
 
-};
+}
 
 
 const addToWishList = async (req, res) => {
-    const user = await User.findById(req.params.userId)
-    if (!user) {
-      return res.status(404).json({ msg: 'Usuario no encontrado' })
-    }
-    let productToWishlist = await Products.findById(req.params._id)
+      const user = await User.findById(req.params.userId);
+      if (!user) {
+          return res.status(404).json({ msg: 'Usuario no encontrado' });
+      }
 
-    if (!productToWishlist) {
-      return res.status(404).json({ msg: 'Producto no encontrado' })
-    }
+      const productToWishlist = await Products.findById(req.params._id);
+      if (!productToWishlist) {
+          return res.status(404).json({ msg: 'Producto no encontrado' });
+      }
 
-    else {
-    const updatedUser = await User.findByIdAndUpdate(req.params._id, { $push: { favs:  req.user._id, } }, { new: true });
-    res.json({ msg: 'Producto añadido a la wishlist', user })
-   }
+      const updatedUser = await User.findByIdAndUpdate(
+          req.params.userId,
+          { $push: { favs: productToWishlist } },
+          { new: true }
+      ).populate('favs')
+
+      res.json({ msg: 'Producto añadido a la wishlist', updatedUser });
 }
 
 const removeFromWishList = async (req, res) => {
@@ -91,7 +94,7 @@ const removeFromWishList = async (req, res) => {
     req.params.userId,
     { $pull: { favs: req.params._id } },
     { new: true }
-  );
+  )
 
   res.json({ msg: 'Producto eliminado de la wishlist', user: updatedUser })
 }

@@ -23,36 +23,37 @@ router.get(
 
 router.post(
 	'/',
-	[auth, admin],
+	[/* auth ,*/ admin],
 	[productValidation,validate],
 	productController.create
 )
 
 router.put(
 	'/:name',
-	[auth, admin],
+	[/* auth ,*/ admin],
 	[productValidation,validate],
 	productController.update
 )
 
 router.delete(
 	'/:name',
-	[auth, admin],
+	[/* auth ,*/ admin],
 	productController.remove
   )
   
 
 router.post(
 	'/users/:userId/wishlist/:_id',
-	auth,
+	/* auth, */
 	productController.addToWishList
 )
 
 router.delete(
 	'/users/:userId/wishlist/:_id',
-	auth,
+	/* auth, */
 	productController.removeFromWishList
 )
+
 
 
 module.exports = router

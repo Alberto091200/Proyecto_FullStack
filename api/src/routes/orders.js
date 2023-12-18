@@ -6,9 +6,8 @@ const validate = require('../middlewares/validate');
 
 const router = Router();
 
-router.get('/', auth, ordersController.getAll);
-router.post('/', auth,  ordersController.create);
-router.put('/:orderId', [auth, admin], ordersController.update);
-// router.delete('/:orderId', auth, admin, ordersController.remove);
+router.get('/', /* auth, */ ordersController.getAll);
+router.post('/', /* auth, */  ordersController.create);
+router.put('/:orderId', [/* auth ,*/ admin], ordersController.update);
 
 module.exports = router;
