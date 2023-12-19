@@ -20,11 +20,12 @@ const login = async (req, res) => {
     }
 
     const token = jwt.sign(
-      { id: user._id, isAdmin: user.isAdmin },
+      { id: user._id, isAdmin: user.isAdmin, username: user.name },
       process.env.privateKey
     )
 
     res.setHeader("x-auth-token", token)
+    res.setHeader("Access-Control-Expose-Headers", "x-auth-token")
     res.json({ msg: "Usuario logueado", user, token })
 
 }
@@ -44,11 +45,12 @@ const register = async (req, res) => {
     const newUser = await User.create({ username, password: hashedPassword, email: req.body.email, isAdmin, ...rest })
 
     const token = jwt.sign(
-      { id: newUser._id, isAdmin: newUser.isAdmin },
+      { id: newUser._id, isAdmin: newUser.isAdmin, username: newUser.name },
       process.env.privateKey
     )
 
     res.setHeader("x-auth-token", token);
+    res.setHeader("Access-Control-Expose-Headers", "x-auth-token")
     res.json({ msg: "Usuario registrado" })
 
 }

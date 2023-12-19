@@ -14,7 +14,7 @@ const fields = [
 
 const schema = yup
   .object({
-    username: yup.string().required('Nombre de usuario obligatorio'),
+    email: yup.string().required('Email obligatorio'),
     password: yup.string().required('Contraseña obligatoria'),
   })
   .required()

@@ -20,6 +20,7 @@ function RegisterPage() {
   const [errorsFromResponse, setErrorsFromResponse] = useState([])
 
   const onSubmit = user => {
+    console.log(user)
     register(user)
       .then(decodedJWT => {
         const { username, isAdmin } = decodedJWT

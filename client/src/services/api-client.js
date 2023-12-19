@@ -27,7 +27,7 @@ apiClient.interceptors.response.use(
     if (error.response.status === 500) {
       toast.error(error.response.data.message)
     } else if (error.response.status === 401 || error.response.status === 403) {
-      toast.error(error.response.data.message)
+      toast.error("Acceso prohibido")
     } else if (error.response.status === 404) {
       toast.error('Recurso no encontrado')
     }

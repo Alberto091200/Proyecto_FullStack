@@ -18,7 +18,7 @@ function ProtectedRoute({ page: Page, role }) {
 
   if (role !== ROLES.ANONYMOUS) toast.error('Acceso Prohibido')
 
-  const to = isAuth ? '/' : '/login'
+  const to = isAuth ? '/products' : '/login'
 
   return <Navigate to={to} replace={true} />
 }

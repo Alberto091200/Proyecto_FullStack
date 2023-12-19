@@ -1,5 +1,4 @@
 import { useState } from 'react'
-
 import {
   AppBar,
   Box,
@@ -10,15 +9,15 @@ import {
   Button,
   Tooltip,
 } from '@mui/material'
-
-import MenuIcon from '@mui/icons-material/Menu'
-
 import { useAuth } from 'hooks'
-
 import { stringAvatar } from './helpers'
-
 import Brand from './Brand'
 import { Menu, CollapseMenu } from '../../components'
+import SearchBar from '../SearchBar/SearchBar'
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import AddIcon from '@mui/icons-material/Add';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
 function Navbar() {
   const [user] = useAuth()
   const [anchorElNav, setAnchorElNav] = useState(null)
@@ -27,43 +26,26 @@ function Navbar() {
   const handleOpenNavMenu = event => setAnchorElNav(event.currentTarget)
   const handleOpenUserMenu = event => setAnchorElUser(event.currentTarget)
 
-  const optionsMainMenu = /* user.admin ? */ [
-    { label: 'Customers', to: '/' },
-  ] /* : [] */
 
-  const optionsUserMenu = user.auth
-    ? [{ label: 'Logout', to: '/logout' }]
+  let optionsUserMenu = [{ label: 'Product', to: '/products' }]
+
+
+  optionsUserMenu = user.auth
+    ? [...optionsUserMenu, { label: 'Logout', to: '/logout' }]
     : [
+      ...optionsUserMenu,
         { label: 'Login', to: '/login' },
         { label: 'Register', to: '/register' },
       ]
 
   return (
-    <AppBar position="static" color="primary">
+    <AppBar sx ={{backgroundColor:"#311178", opacity:'0.95'}}>
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
+        <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between' }}>
+
           <Brand />
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <CollapseMenu
-              anchor={anchorElNav}
-              onClose={() => setAnchorElNav(null)}
-              options={optionsMainMenu}
-            />
-          </Box>
-
-          <Menu
-            options={optionsMainMenu}
-            onClose={() => setAnchorElNav(null)}
-          />
-
+          <SearchBar      />
+          
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -71,7 +53,7 @@ function Navbar() {
                   {...stringAvatar(
                     !user.auth
                       ? 'John Doe'
-                      : user.toUpperCase() + ' ' + 'V'
+                      : user.username.toUpperCase() + ' ' + 'V'
                   )}
                 />
               </IconButton>
