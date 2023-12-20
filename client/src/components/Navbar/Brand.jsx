@@ -22,10 +22,10 @@ function Brand() {
         }}
         to="/products"
       >
-        ENTITY
+        GameAmen
       </Typography>
     </Box>
-  );
+  )
 }
 
 export default Brand;

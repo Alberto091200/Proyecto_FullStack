@@ -32,12 +32,9 @@ function ProductCard(){
 
   }
 
-  
   const filteredProducts = !query ? products : products.filter(product => product.name?.toLowerCase().startsWith(query.toLowerCase()))
 
-
   const [isFaved, setIsFaved] = useState(false)
- 
 
   useEffect(() => {
     apiClient.get("/products/")
@@ -52,8 +49,6 @@ function ProductCard(){
     setIsFaved(!isFaved);
   }
 
-
-  
   return (
     <div
     style={{
@@ -101,6 +96,7 @@ function ProductCard(){
                 <IconButton onClick={handleToggleFaved} style={{ color: 'white' }}>
                   {isFaved ? <FavoriteIcon style={{ fontSize: '2.2rem', color: 'red' }} /> : <FavoriteBorderIcon style={{ fontSize: '2.2rem' }} />}
                 </IconButton>
+                
               </CardContent>
 
               <CardActions sx={{ justifyContent: 'center' }}>

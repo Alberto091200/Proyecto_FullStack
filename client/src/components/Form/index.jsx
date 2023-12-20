@@ -35,7 +35,10 @@ function Form({
     <Stack
       component="form"
       onSubmit={handleSubmit(data => onSubmit(data, { setError, reset }))}
-      spacing={5}
+      spacing={2}
+      display={'flex'}
+      alignItems={'center'}
+  
     >
       {inputs.map(({ name, type, ...rest }) => {
         const Input = fields[type] || fields.input
@@ -50,11 +53,47 @@ function Form({
             inputRef={ref}
             {...registerProps}
             {...rest}
+            sx={{
+              width:'90%',
+              '& input': {
+                  color: 'white',
+              },
+              "& fieldset": { 
+                  border: 'none',
+                  fontSize: '50px'
+              },
+              backgroundColor: '#360f8c',
+              borderRadius: '5px',
+              outline: 'none',
+              '&:hover': {
+                  backgroundColor: '#2a0875',
+                  border: 0,
+                  boxShadow: "inset 0 0 0 2px white"
+              }
+          }}
+
           />
         )
       })}
 
-      <Button type="submit">{submitLabel}</Button>
+      <Button type="submit"
+        sx={{
+          backgroundColor: 'yellow',
+          color: 'black',
+          width: '50%',
+          margin: 'auto',
+          marginTop: '5%',
+          borderRadius: '1px',
+          fontFamily: 'Montserrat, sans-serif',
+          fontSize: '17px',
+          fontWeight: '800',
+          display: 'flex',
+          
+          '&:hover': {
+              backgroundColor: '#e3bf14',
+          },
+      }}
+      >{submitLabel}</Button>
     </Stack>
   )
 }

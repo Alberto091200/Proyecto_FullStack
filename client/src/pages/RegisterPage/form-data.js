@@ -3,23 +3,29 @@ import * as yup from 'yup'
 const fields = [
   {
     name: 'name',
-    label: 'Nombre',
+    label: '',
+    placeholder: 'Nombre'
   },
   {
     name: 'apellido',
-    label: 'Apellido'
+    label: '',
+    placeholder: 'Apellido'
   },
   {
     name: 'password',
-    label: 'Contraseña',
+    label: '',
     type: 'password',
+    placeholder: 'Contraseña'
   },
   {
     name: 'email',
-    label: 'Email'
+    label: '',
+    placeholder: 'Email'
+
   },  {
     name: 'direccion',
-    label: 'Direccion',
+    label: '',
+    placeholder:'Direccion'
   }
 ]
 

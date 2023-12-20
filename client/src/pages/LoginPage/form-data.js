@@ -3,11 +3,13 @@ import * as yup from 'yup'
 const fields = [
   {
     name: 'email',
-    label: 'Email',
+    label: '',
+    placeholder:'Email'
   },
   {
     name: 'password',
-    label: 'Contraseña',
+    label: '',
+    placeholder:'Contraseña',
     type: 'password',
   },
 ]
