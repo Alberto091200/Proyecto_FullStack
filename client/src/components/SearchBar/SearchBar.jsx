@@ -9,7 +9,9 @@ function SearchBar( ) {
 
   return (
     <>
+
     <h2>{cart.length}</h2>
+    
     <TextField
         placeholder= 'Buscar...'
         variant="outlined"
