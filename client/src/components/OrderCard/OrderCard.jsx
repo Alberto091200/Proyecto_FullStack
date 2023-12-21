@@ -19,10 +19,11 @@ function OrderCard() {
         boxShadow: '0px 0px 5px 5px #400857',
         padding: isMobile ? '5px' : '15px',
         marginBottom: '10px',
+        color:'white',
       }}
     >
-      <p>Fecha</p>
-      <p>Precio</p>
+      <p>21/12/23</p>
+      <p>Total=40€</p>
       <p>PDF</p>
     </Container>
   )

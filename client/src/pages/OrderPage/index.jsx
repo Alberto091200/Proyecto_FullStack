@@ -24,7 +24,7 @@ function OrderPage() {
     >
       <div
         style={{
-          width: '100%', // Hace que el contenido interno ocupe todo el ancho disponible
+          width: '100%', 
           marginLeft: '30px',
           fontFamily: 'Montserrat, sans-serif',
           marginRight: '30px',
