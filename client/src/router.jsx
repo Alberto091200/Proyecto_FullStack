@@ -11,6 +11,7 @@ import LoginPage from './pages/LoginPage'
 import LogoutPage from './pages/LogoutPage'
 import RegisterPage from './pages/RegisterPage'
 import ProtectedRoute from './utils/ProtectedRoute'
+import DescriptionPage from './pages/DescriptionPage'
 
 const WorkdaysPage = () => <h1>workdays</h1>
 
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: '/products',
         element: <ProductsPage />,
+      },
+      {
+        path: '/products/description/:name',
+        element: < DescriptionPage/>,
       },
    /*    {
         path: '/customer/new',

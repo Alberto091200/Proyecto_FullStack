@@ -1,12 +1,14 @@
 import * as React from "react";
-import ProductCard from "src/components/ProductCard/ProductCard"
+import Catalog from "src/components/Catalog/Catalog"
 
 function ProductsPage() {
 
   document.documentElement.style.backgroundColor = "#4618AC"
   return (
     <>
-      <ProductCard />
+    <div style={{marginTop:'100px'}}>
+      <Catalog />
+    </div>
     </>
   )
 }

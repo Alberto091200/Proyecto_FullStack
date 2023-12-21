@@ -31,7 +31,7 @@ function Navbar() {
 
 
   optionsUserMenu = user.auth
-    ? [...optionsUserMenu, { label: 'Logout', to: '/logout' }]
+    ? [...optionsUserMenu, { label: 'Orders', to: '/logout' }, { label: 'Logout', to: '/logout' }]
     : [
       ...optionsUserMenu,
         { label: 'Login', to: '/login' },
@@ -41,7 +41,7 @@ function Navbar() {
   return (
     <AppBar sx ={{backgroundColor:"#311178", opacity:'0.95'}}>
       <Container maxWidth="xl">
-        <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between'}}>
 
           <Brand />
           <SearchBar      />

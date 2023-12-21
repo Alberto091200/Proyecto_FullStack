@@ -5,7 +5,7 @@ import { useProducts } from 'src/hooks';
 function SearchBar( ) {
 
     const {query, setQuery, cart} = useProducts()
-    console.log(cart)
+    
 
   return (
     <>

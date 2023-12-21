@@ -1,11 +1,14 @@
 import { NavLink } from "react-router-dom";
 import { Typography, Box } from "@mui/material";
-import Logo from '../../assets/GameAmen.png'
+import logo from '../../assets/GameAmen.png'
+
+const imgUrl = new URL('./img.png', import.meta.url).href
+
 
 function Brand() {
   return (
     <Box sx={{ display: 'flex', alignItems: 'center' }}>
-      <img src={Logo} alt="Logo" style={{ width: '70px', height: '70px' }} />
+      <img src={logo} alt="Logo" style={{ width: '70px', height: '70px' }} />
       <Typography
         variant="h6"
         noWrap
