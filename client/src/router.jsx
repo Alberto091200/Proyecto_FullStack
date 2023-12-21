@@ -5,7 +5,7 @@ import {
 
 import RootLayout from 'layouts/RootLayout'
 import ErrorPage from 'pages/ErrorPage'
-// import CustomersPage from './pages/CustomersPage'
+import OrderPage from './pages/OrderPage'
 import ProductsPage from './pages/ProductsPage'
 import LoginPage from './pages/LoginPage'
 import LogoutPage from './pages/LogoutPage'
@@ -23,16 +23,16 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <WorkdaysPage/>,
-      },
-/*       {
-        path: '/customers',
-        element: <CustomersPage/>,
-      }, */
-      {
-        path: '/products',
         element: <ProductsPage />,
       },
+      {
+        path: '/user/orders',
+        element: <OrderPage/>,
+      },
+       {
+        path: '/products',
+        element: <ProductsPage />,
+      }, 
       {
         path: '/products/description/:name',
         element: < DescriptionPage/>,

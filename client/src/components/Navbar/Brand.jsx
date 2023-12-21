@@ -21,7 +21,7 @@ function Brand() {
           color: "inherit",
           textDecoration: "none",
         }}
-        to="/products"
+        to="/"
       >
         GameAmen
       </Typography>

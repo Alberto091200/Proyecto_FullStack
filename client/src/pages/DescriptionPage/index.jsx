@@ -45,15 +45,15 @@ function DescriptionPage() {
           </div>
 
           <Divider
-                    orientation="horizontal"
-                    flexItem
-                    sx={{
-                      opacity: isMobile ? '0' : '1',
-                      borderWidth: '0.5px',
-                      marginLeft: '30px',
-                      backgroundColor: 'white',
-                    }}
-                  />
+              orientation="horizontal"
+              flexItem
+              sx={{
+                opacity: isMobile ? '0' : '1',
+                borderWidth: '0.5px',
+                marginLeft: '30px',
+                backgroundColor: 'white',
+              }}
+            />
           
           <div
             style={{

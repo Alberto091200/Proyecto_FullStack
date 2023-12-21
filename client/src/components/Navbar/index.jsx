@@ -25,11 +25,11 @@ function Navbar() {
   const handleOpenUserMenu = event => setAnchorElUser(event.currentTarget)
 
 
-  let optionsUserMenu = [{ label: 'Product', to: '/products' }]
+  let optionsUserMenu = [{ label: 'Product', to: '/' }]
 
 
   optionsUserMenu = user.auth
-    ? [...optionsUserMenu, { label: 'Orders', to: '/logout' },{ label: 'Add product', to: '/logout' }, { label: 'Logout', to: '/logout' }]
+    ? [...optionsUserMenu, { label: 'Orders', to: '/user/orders' },{ label: 'Add product', to: '/logout' }, { label: 'Logout', to: '/logout' }]
     : [
       ...optionsUserMenu,
         { label: 'Login', to: '/login' },
@@ -39,10 +39,16 @@ function Navbar() {
   return (
     <AppBar sx ={{backgroundColor:"#311178", opacity:'0.95'}}>
       <Container maxWidth="xl">
-        <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between'}}>
+        <Toolbar
+          disableGutters
+          sx={{
+            height:'40px',
+            display: 'flex',
+            justifyContent: 'space-between'
+          }}>
 
           <Brand />
-          <SearchBar      />
+          <SearchBar/>
           
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
