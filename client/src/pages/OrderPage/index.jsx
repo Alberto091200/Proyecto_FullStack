@@ -1,7 +1,10 @@
-import { Container, Divider } from '@mui/material';
+import { Container, Divider, useTheme, useMediaQuery } from '@mui/material';
+import OrderCard from 'src/components/OrderCard/OrderCard';
 
 function OrderPage() {
   document.documentElement.style.backgroundColor = "#1F0A4E";
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <Container 
@@ -9,29 +12,33 @@ function OrderPage() {
       sx={{
         backgroundColor: '#4618AC',
         display: 'flex',
-        flexDirection:'column',
+        flexDirection: 'column',
         justifyContent: 'center',
-        alignItems:'center',
+        alignItems: 'center',
         marginTop: '150px',
-        maxWidth: 'auto',
+        width: '100%',
         borderRadius: '15px',
         boxShadow: '0px 10px 100px 50px #400857',
+        padding: isMobile ? '10px' : '20px',
       }}
     >
       <div
         style={{
-          width: 'auto',
+          width: '100%', // Hace que el contenido interno ocupe todo el ancho disponible
           marginLeft: '30px',
           fontFamily: 'Montserrat, sans-serif',
           marginRight: '30px',
-          marginBottom: '30px'
+          marginBottom: '10px',
         }}
       >
         <h2
           style={{
+            marginTop:'-5px',
             color: 'white',
-            fontSize: '40px',
-          }}>
+            fontSize: isMobile ? '25px' : '30px',
+            textAlign: 'center',
+          }}
+        >
           Pedidos
         </h2>
 
@@ -39,56 +46,20 @@ function OrderPage() {
           orientation="horizontal"
           flexItem
           sx={{
-            marginTop:'-20px',
-            width:'1000px',
+            marginTop: '-10px',
+            width: '100%',
             borderWidth: '0.5px',
             backgroundColor: 'white',
+            marginBottom:'30px'
           }}
         />
 
-        {/* Contenedor para el primer pedido */}
-        <Container 
-          displayGutters
-          sx={{
-            backgroundColor: '#4618AC',
-            display: 'flex',
-            flexDirection:'column',
-            justifyContent: 'center',
-            alignItems:'center',
-            marginTop: '30px', // Ajusta la distancia entre pedidos
-            maxWidth: 'auto',
-            borderRadius: '15px',
-            boxShadow: '0px 5px 30px 10px #400857', // Ajusta el tamaño de la sombra
-            padding: '30px',
-            marginBottom: '10px', // Ajusta la distancia entre pedidos
-          }}
-        >
-          <p>Pedido1</p>
-        </Container>
+          <OrderCard/>
 
-        {/* Contenedor para el segundo pedido */}
-        <Container 
-          displayGutters
-          sx={{
-            backgroundColor: '#4618AC',
-            display: 'flex',
-            flexDirection:'column',
-            justifyContent: 'center',
-            alignItems:'center',
-            marginTop: '30px', // Ajusta la distancia entre pedidos
-            maxWidth: 'auto',
-            borderRadius: '15px',
-            boxShadow: '0px 5px 30px 10px #400857', // Ajusta el tamaño de la sombra
-            padding: '30px',
-            marginBottom: '10px', // Ajusta la distancia entre pedidos
-          }}
-        >
-          <p>Pedido2</p>
-        </Container>
 
       </div>
     </Container>
-  );
+  )
 }
 
-export default OrderPage;
+export default OrderPage
