@@ -30,7 +30,7 @@ function ProductCard({product, onAddCart}) {
 
               <CardContent sx={{ color: 'white', display: 'flex', justifyContent: 'space-between' }}>
                 <div>
-                  <Link to = {'/products/description'}
+                  <Link to = {`/products/description/${product.name}`}
                     style={{
                       textDecoration: 'none',
                       color: 'inherit'

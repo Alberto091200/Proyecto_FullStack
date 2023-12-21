@@ -14,9 +14,7 @@ import { stringAvatar } from './helpers'
 import Brand from './Brand'
 import { Menu, CollapseMenu } from '../../components'
 import SearchBar from '../SearchBar/SearchBar'
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import AddIcon from '@mui/icons-material/Add';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
 
 function Navbar() {
   const [user] = useAuth()
@@ -31,7 +29,7 @@ function Navbar() {
 
 
   optionsUserMenu = user.auth
-    ? [...optionsUserMenu, { label: 'Orders', to: '/logout' }, { label: 'Logout', to: '/logout' }]
+    ? [...optionsUserMenu, { label: 'Orders', to: '/logout' },{ label: 'Add product', to: '/logout' }, { label: 'Logout', to: '/logout' }]
     : [
       ...optionsUserMenu,
         { label: 'Login', to: '/login' },
